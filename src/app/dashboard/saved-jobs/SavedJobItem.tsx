@@ -1,29 +1,46 @@
 'use client'
 
-import { useTransition } from 'react'
+import { useState, useTransition } from 'react'
 import { unsaveJob } from '../actions'
 import styles from "../../page.module.css"
 
 interface SavedJobItemProps {
-  job: any
+  job: {
+    id: string
+    title: string
+    company: string
+    location?: string
+    salary?: string
+    posted_at?: string
+    url: string
+    match_score?: number
+  }
 }
 
 export default function SavedJobItem({ job }: SavedJobItemProps) {
   const [isPending, startTransition] = useTransition()
+  const [feedback, setFeedback] = useState<{
+    type: 'success' | 'error'
+    message: string
+  } | null>(null)
 
   const handleUnsave = async () => {
-    if (confirm('Remove this job from your saved list?')) {
-      startTransition(async () => {
-        try {
-          const result = await unsaveJob(job.id)
-          if (result?.error) {
-            alert(`Error unsaving job: ${result.error}`)
-          }
-        } catch (e: any) {
-          alert(`Failed to unsave job: ${e.message}`)
+    startTransition(async () => {
+      setFeedback(null)
+      try {
+        const result = await unsaveJob(job.id)
+        if (result?.error) {
+          setFeedback({ type: 'error', message: `Error unsaving job: ${result.error}` })
+        } else {
+          setFeedback({ type: 'success', message: 'Job removed from saved jobs.' })
         }
-      })
-    }
+      } catch (e: unknown) {
+        setFeedback({
+          type: 'error',
+          message: `Failed to unsave job: ${e instanceof Error ? e.message : 'Unknown error'}`,
+        })
+      }
+    })
   }
 
   const handleApply = (url: string) => {
@@ -50,23 +67,36 @@ export default function SavedJobItem({ job }: SavedJobItemProps) {
           </div>
         </div>
         
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
-          <button 
-            onClick={handleUnsave} 
-            className={styles.secondarySmall}
-            disabled={isPending}
-            style={{ padding: '0.5rem 1rem' }}
-          >
-            Unsave
-          </button>
-          <button 
-            onClick={() => handleApply(job.url)} 
-            className={styles.primary}
-            disabled={isPending}
-            style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}
-          >
-            Apply Now
-          </button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-end' }}>
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <button 
+              onClick={handleUnsave} 
+              className={styles.secondarySmall}
+              disabled={isPending}
+              style={{ padding: '0.5rem 1rem' }}
+            >
+              Unsave
+            </button>
+            <button 
+              onClick={() => handleApply(job.url)} 
+              className={styles.primary}
+              disabled={isPending}
+              style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}
+            >
+              Apply Now
+            </button>
+          </div>
+          {feedback && (
+            <p
+              style={{
+                fontSize: '0.75rem',
+                fontWeight: 500,
+                color: feedback.type === 'success' ? '#15803d' : '#dc2626',
+              }}
+            >
+              {feedback.message}
+            </p>
+          )}
         </div>
       </div>
     </div>

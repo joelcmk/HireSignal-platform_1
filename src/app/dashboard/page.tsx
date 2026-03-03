@@ -83,9 +83,11 @@ export default async function DashboardPage() {
       {/* Suggested Jobs Section */}
       {websites && websites.length > 0 && (
         <section className={styles.section}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
             <h3 className={styles.sectionTitle}>Suggested for You</h3>
-            <ClearJobsButton />
+            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+              <ClearJobsButton />
+            </div>
           </div>
           <JobQueue initialJobs={filteredJobs} />
         </section>

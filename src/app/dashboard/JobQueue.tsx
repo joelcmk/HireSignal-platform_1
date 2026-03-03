@@ -1,6 +1,6 @@
 'use client'
 
-import { useTransition } from 'react'
+import { useState, useTransition } from 'react'
 import { hideJob, saveJob } from './actions'
 import styles from './jobqueue.module.css'
 
@@ -20,6 +20,11 @@ interface JobQueueProps {
 
 export default function JobQueue({ initialJobs }: JobQueueProps) {
   const [isPending, startTransition] = useTransition()
+  const [saveFeedback, setSaveFeedback] = useState<{
+    jobId: string
+    type: 'success' | 'error'
+    message: string
+  } | null>(null)
 
   const handleHide = async (id: string) => {
     startTransition(async () => {
@@ -28,14 +33,15 @@ export default function JobQueue({ initialJobs }: JobQueueProps) {
         if (result?.error) {
           alert(`Error hiding job: ${result.error}`)
         }
-      } catch (e: any) {
-        alert(`Failed to hide job: ${e.message}`)
+      } catch (e: unknown) {
+        alert(`Failed to hide job: ${e instanceof Error ? e.message : 'Unknown error'}`)
       }
     })
   }
 
   const handleSave = async (job: Job) => {
     startTransition(async () => {
+      setSaveFeedback(null)
       try {
         const result = await saveJob({
           id: job.id,
@@ -46,12 +52,24 @@ export default function JobQueue({ initialJobs }: JobQueueProps) {
           created_at: job.created_at
         })
         if (result?.error) {
-          alert(`Error saving job: ${result.error}`)
+          setSaveFeedback({
+            jobId: job.id,
+            type: 'error',
+            message: `Error saving job: ${result.error}`,
+          })
         } else {
-          alert('Job saved successfully!')
+          setSaveFeedback({
+            jobId: job.id,
+            type: 'success',
+            message: 'Job saved successfully.',
+          })
         }
-      } catch (e: any) {
-        alert(`Failed to save job: ${e.message}`)
+      } catch (e: unknown) {
+        setSaveFeedback({
+          jobId: job.id,
+          type: 'error',
+          message: `Failed to save job: ${e instanceof Error ? e.message : 'Unknown error'}`,
+        })
       }
     })
   }
@@ -79,27 +97,38 @@ export default function JobQueue({ initialJobs }: JobQueueProps) {
                 </div>
               </div>
               <div className={styles.actions}>
-                <button 
-                  onClick={() => handleHide(job.id)} 
-                  className={styles.hideBtn}
-                  disabled={isPending}
-                >
-                  Hide
-                </button>
-                <button 
-                  onClick={() => handleSave(job)} 
-                  className={styles.saveBtn}
-                  disabled={isPending}
-                >
-                  Save
-                </button>
-                <button 
-                  onClick={() => handleApply(job.url)} 
-                  className={styles.applyBtn}
-                  disabled={isPending}
-                >
-                  Apply Now
-                </button>
+                <div className={styles.actionsRow}>
+                  <button 
+                    onClick={() => handleHide(job.id)} 
+                    className={styles.hideBtn}
+                    disabled={isPending}
+                  >
+                    Hide
+                  </button>
+                  <button 
+                    onClick={() => handleSave(job)} 
+                    className={styles.saveBtn}
+                    disabled={isPending}
+                  >
+                    Save
+                  </button>
+                  <button 
+                    onClick={() => handleApply(job.url)} 
+                    className={styles.applyBtn}
+                    disabled={isPending}
+                  >
+                    Apply Now
+                  </button>
+                </div>
+                {saveFeedback?.jobId === job.id && (
+                  <p
+                    className={`${styles.feedback} ${
+                      saveFeedback.type === 'success' ? styles.feedbackSuccess : styles.feedbackError
+                    }`}
+                  >
+                    {saveFeedback.message}
+                  </p>
+                )}
               </div>
             </div>
           ))
