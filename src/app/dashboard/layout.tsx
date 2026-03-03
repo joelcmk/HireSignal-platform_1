@@ -19,9 +19,9 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className={styles.dashboardLayout}>
+    <div className={styles.dashboardContainer}>
       <Sidebar userEmail={user.email || ''} />
-      <div className={styles.contentWrapper}>
+      <div className={styles.mainWrapper}>
         {children}
       </div>
     </div>

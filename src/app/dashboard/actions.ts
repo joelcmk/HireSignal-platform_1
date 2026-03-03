@@ -9,14 +9,14 @@ import { redirect } from 'next/navigation'
 export async function syncJobs() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('User must be logged in')
+  if (!user) return { success: false, error: 'User must be logged in', totalJobsFound: 0, allJobs: [] }
 
   const { data: websites } = await supabase.from('websites').select('*').eq('user_id', user.id)
   
   if (!websites || websites.length === 0) {
     await supabase.from('jobs').delete().eq('user_id', user.id)
     revalidatePath('/dashboard')
-    return { success: true, message: 'All job sources removed. Job queue cleared.' }
+    return { success: true, message: 'All job sources removed. Job queue cleared.', totalJobsFound: 0, allJobs: [] }
   }
 
   // Cleanup orphan jobs
@@ -28,6 +28,8 @@ export async function syncJobs() {
   }
 
   let totalJobsFound = 0;
+  const allJobs: any[] = [];
+
   for (const website of websites) {
     const cleanUrl = getCleanUrl(website.url);
     const companyName = getCompanyNameFromUrl(cleanUrl);
@@ -47,12 +49,25 @@ export async function syncJobs() {
 
     if (jobsToInsert.length > 0) {
       const { error } = await supabase.from('jobs').upsert(jobsToInsert, { onConflict: 'user_id,url' })
-      if (!error) totalJobsFound += jobsToInsert.length;
+      if (!error) {
+        totalJobsFound += jobsToInsert.length;
+        allJobs.push({
+          url: cleanUrl,
+          jobsFound: jobsToInsert.length,
+          jobs: jobsToInsert
+        });
+      }
+    } else {
+      allJobs.push({
+        url: cleanUrl,
+        jobsFound: 0,
+        jobs: []
+      });
     }
   }
 
   revalidatePath('/dashboard')
-  return { success: true, totalJobsFound, message: `Successfully updated your job database.` }
+  return { success: true, totalJobsFound, allJobs, message: `Successfully updated your job database.` }
 }
 
 export async function addWebsite(formData: FormData) {
