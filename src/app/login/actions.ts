@@ -4,16 +4,19 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { createClient } from '@/utils/supabase/server'
-import { headers } from 'next/headers'
 
 export async function signInWithGoogle() {
   const supabase = await createClient()
-  const origin = (await headers()).get('origin')
+  
+  // Get the site URL from environment or build a fallback
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+    process.env.NEXT_PUBLIC_VERCEL_URL || 
+    'https://hire-signal-platform-1.vercel.app'
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `${origin}/auth/callback`,
+      redirectTo: `${siteUrl}/auth/callback`,
     },
   })
 
@@ -23,7 +26,7 @@ export async function signInWithGoogle() {
   }
 
   if (data.url) {
-    redirect(data.url) // use redirection for OAuth
+    redirect(data.url)
   }
 }
 
