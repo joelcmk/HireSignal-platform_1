@@ -62,7 +62,7 @@ export default function JobQueue({ initialJobs }: JobQueueProps) {
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>Suggested for You</h3>
+      
       <div className={styles.queue}>
         {initialJobs && initialJobs.length > 0 ? (
           initialJobs.map(job => (
