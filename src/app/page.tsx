@@ -37,6 +37,9 @@ export default async function Home() {
             <Link href="#features" className={`${styles.heroButton} ${styles.heroSecondary}`}>
               Learn More
             </Link>
+            <Link href="#faq" className={`${styles.heroButton} ${styles.heroSecondary}`}>
+              FAQ
+            </Link>
           </div>
         </section>
 
@@ -87,6 +90,36 @@ export default async function Home() {
             </div>
             <h3 className={styles.featureTitle}>Free to Start</h3>
             <p className={styles.featureDesc}>No credit card required. Start monitoring jobs from your dream companies today.</p>
+          </div>
+        </section>
+
+        <section id="faq" className={styles.faq}>
+          <h2 className={styles.faqTitle}>Frequently Asked Questions</h2>
+          <div className={styles.faqGrid}>
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>How does HireSignal work?</h3>
+              <p className={styles.faqAnswer}>Add the career page URLs of companies you&apos;re interested in. HireSignal will automatically check these pages for new job openings and alert you when something matching your preferences is posted.</p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>Is it really free?</h3>
+              <p className={styles.faqAnswer}>Yes! HireSignal is free to start. Add your target companies and start receiving job alerts immediately.</p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>How often does HireSignal check for new jobs?</h3>
+              <p className={styles.faqAnswer}>We check career pages periodically throughout the day. The exact frequency depends on our system load.</p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>Can I filter jobs by location or title?</h3>
+              <p className={styles.faqAnswer}>Absolutely! When adding a website, you can specify filters for job titles, locations, and keywords.</p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>What if a company doesn&apos;t have a career page?</h3>
+              <p className={styles.faqAnswer}>HireSignal works with companies that have public career pages or job boards like LinkedIn and Indeed.</p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3 className={styles.faqQuestion}>How do I get started?</h3>
+              <p className={styles.faqAnswer}>Simply sign up for free, go to your dashboard, and add the career page URLs of companies you want to monitor.</p>
+            </div>
           </div>
         </section>
       </main>
