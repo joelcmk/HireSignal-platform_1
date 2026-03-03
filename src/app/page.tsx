@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <div className={styles.page}>
       <nav className={styles.navbar}>
-        <div className={styles.logo}>Hiresignal</div>
+        <div className={styles.logo}>HireSignal</div>
         <div className={styles.navLinks}>
           <Link href="/login" className={styles.navLink}>Log in</Link>
           <Link href="/signup" className={styles.primaryButton}>Sign up</Link>
@@ -28,7 +28,7 @@ export default async function Home() {
             Discover Top Talent with <span className={styles.highlight}>Precision</span>
           </h1>
           <p className={styles.subtitle}>
-            Hiresignal empowers your team to find, evaluate, and hire the best candidates faster than ever before. Built for modern teams.
+            HireSignal empowers your team to find, evaluate, and hire the best candidates faster than ever before. Built for modern teams.
           </p>
           <div className={styles.ctas}>
             <Link href="/signup" className={`${styles.heroButton} ${styles.heroPrimary}`}>

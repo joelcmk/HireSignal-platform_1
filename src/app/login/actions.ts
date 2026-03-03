@@ -5,13 +5,21 @@ import { redirect } from 'next/navigation'
 
 import { createClient } from '@/utils/supabase/server'
 
+function getSiteUrl() {
+  const configured =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.NEXT_PUBLIC_VERCEL_URL
+
+  if (!configured) {
+    return 'http://localhost:3000'
+  }
+
+  return configured.startsWith('http') ? configured : `https://${configured}`
+}
+
 export async function signInWithGoogle() {
   const supabase = await createClient()
-  
-  // Get the site URL from environment or build a fallback
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
-    process.env.NEXT_PUBLIC_VERCEL_URL || 
-    'https://hire-signal-platform-1.vercel.app'
+  const siteUrl = getSiteUrl()
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',

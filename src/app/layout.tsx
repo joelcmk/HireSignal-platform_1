@@ -3,7 +3,7 @@ import "./globals.css";
 import ThemeToggle from "@/components/ThemeToggle/ThemeToggle";
 
 export const metadata: Metadata = {
-  title: "Hiresignal Platform",
+  title: "HireSignal Platform",
   description: "A professional platform built with Next.js and Supabase",
 };
 

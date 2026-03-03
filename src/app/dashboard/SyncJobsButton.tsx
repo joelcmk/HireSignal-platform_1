@@ -12,7 +12,7 @@ export default function SyncJobsButton() {
       try {
         const result = await syncJobs()
         if (result?.success) {
-          console.log('%c🚀 [Hiresignal Sync Successful]', 'color: #2563eb; font-weight: bold; font-size: 14px;');
+          console.log('%c🚀 [HireSignal Sync Successful]', 'color: #2563eb; font-weight: bold; font-size: 14px;');
           console.log(`Total Jobs Found: ${result.totalJobsFound}`);
           
           if (result.allJobs && result.allJobs.length > 0) {
