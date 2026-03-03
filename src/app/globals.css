@@ -1,3 +1,4 @@
+html { scroll-behavior: smooth; }
 :root {
   /* Light Theme (Default) */
   --background: #ffffff;
