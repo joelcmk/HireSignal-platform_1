@@ -64,6 +64,30 @@ export default async function Home() {
             <h3 className={styles.featureTitle}>Track Applications</h3>
             <p className={styles.featureDesc}>Save jobs you&apos;re interested in and track your application status in one organized place.</p>
           </div>
+
+          <div className={styles.featureCard}>
+            <div className={styles.featureIcon}>
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" /></svg>
+            </div>
+            <h3 className={styles.featureTitle}>Filter by Preferences</h3>
+            <p className={styles.featureDesc}>Set filters for job titles, locations, and keywords. Only see jobs that matter to you.</p>
+          </div>
+
+          <div className={styles.featureCard}>
+            <div className={styles.featureIcon}>
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 className={styles.featureTitle}>Save Time</h3>
+            <p className={styles.featureDesc}>No more manually checking dozens of career pages. We do the work so you can focus on interviews.</p>
+          </div>
+
+          <div className={styles.featureCard}>
+            <div className={styles.featureIcon}>
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+            </div>
+            <h3 className={styles.featureTitle}>Free to Start</h3>
+            <p className={styles.featureDesc}>No credit card required. Start monitoring jobs from your dream companies today.</p>
+          </div>
         </section>
       </main>
     </div>
