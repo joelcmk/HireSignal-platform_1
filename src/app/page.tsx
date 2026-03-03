@@ -23,16 +23,16 @@ export default async function Home() {
 
       <main className={styles.main}>
         <section className={styles.hero}>
-          <div className={styles.badge}>✨ Next Generation Hiring</div>
+          <div className={styles.badge}>✨ Land Your Dream Job</div>
           <h1 className={styles.title}>
-            Discover Top Talent with <span className={styles.highlight}>Precision</span>
+            Never Miss a <span className={styles.highlight}>Great Opportunity</span> Again
           </h1>
           <p className={styles.subtitle}>
-            HireSignal empowers your team to find, evaluate, and hire the best candidates faster than ever before. Built for modern teams.
+            HireSignal automatically monitors company career pages and sends you personalized job alerts. Focus on preparing for interviews while we do the searching.
           </p>
           <div className={styles.ctas}>
             <Link href="/signup" className={`${styles.heroButton} ${styles.heroPrimary}`}>
-              Get Started for Free
+              Start Job Hunting for Free
             </Link>
             <Link href="#features" className={`${styles.heroButton} ${styles.heroSecondary}`}>
               Learn More
@@ -45,24 +45,24 @@ export default async function Home() {
             <div className={styles.featureIcon}>
               <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
             </div>
-            <h3 className={styles.featureTitle}>Smart Sourcing</h3>
-            <p className={styles.featureDesc}>Leverage advanced algorithms to uncover passive candidates that perfectly match your job requirements.</p>
+            <h3 className={styles.featureTitle}>Automatic Job Monitoring</h3>
+            <p className={styles.featureDesc}>Add your target companies and we&apos;ll continuously check their career pages for new openings that match your preferences.</p>
           </div>
           
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>
-              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
             </div>
-            <h3 className={styles.featureTitle}>Collaborative Hiring</h3>
-            <p className={styles.featureDesc}>Bring your entire team into the process with shared notes, real-time feedback, and unified scoring.</p>
+            <h3 className={styles.featureTitle}>Instant Alerts</h3>
+            <p className={styles.featureDesc}>Get notified the moment new jobs matching your criteria are posted. Be the first to apply.</p>
           </div>
 
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>
-              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
             </div>
-            <h3 className={styles.featureTitle}>Lightning Fast</h3>
-            <p className={styles.featureDesc}>Experience a platform built for speed. Cut down your time-to-hire with automated workflows.</p>
+            <h3 className={styles.featureTitle}>Track Applications</h3>
+            <p className={styles.featureDesc}>Save jobs you&apos;re interested in and track your application status in one organized place.</p>
           </div>
         </section>
       </main>
